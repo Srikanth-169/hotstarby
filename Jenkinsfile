@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
         steps{
-            gitbranch: 'main'
+            gitbranch: 'main',
             url: https://github.com/Srikanth-169/hotstarby.git
                 }
         }
