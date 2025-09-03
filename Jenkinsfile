@@ -2,6 +2,12 @@ pipeline {
     agent any
 
     stages {
+        stage('Git Checkout') {
+        steps{
+            gitbranch: 'main'
+            url: https://github.com/Srikanth-169/hotstarby.git
+                }
+        }
         stage('Build with Maven') {
             steps {
                 sh 'mvn clean package -DskipTests'
