@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    environment {
+        APP_NAME = "hotstar"
+        IMAGE_NAME = "hotstar:v1"
+        CONTAINER_NAME = "hotstar"
+        HOST_PORT = "8082"
+        CONTAINER_PORT = "8080"
 
     stages {
         stage('Build with Maven') {
