@@ -6,6 +6,7 @@ pipeline {
         CONTAINER_NAME = "hotstar"
         HOST_PORT = "8082"
         CONTAINER_PORT = "8080"
+    }
 
     stages {
         stage('Build with Maven') {
