@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         APP_NAME = "hotstar"
-        IMAGE_NAME = "hotstar:v1"
+        IMAGE_NAME = "hotstar:latest"
         CONTAINER_NAME = "hotstar"
         HOST_PORT = "8082"
         CONTAINER_PORT = "8080"
@@ -24,18 +24,17 @@ pipeline {
             }
         }
 
-        stage('Push to Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh '''
-                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                        docker tag mytomcat $DOCKER_USER/mytomcat:latest
-                        docker push $DOCKER_USER/mytomcat:latest
-                        docker logout
-                    '''
-                }
-            }
+       stage('Push to Docker Hub') {
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub_creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+            sh '''
+                echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                docker tag hotstar:v1 $DOCKER_USER/hotstar:latest
+                docker push $DOCKER_USER/hotstar:latest
+            '''
         }
+    }
+}
 
         stage('Deploy Container') {
             steps {
